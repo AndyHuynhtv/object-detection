@@ -18,7 +18,8 @@ use App\Http\Controllers\admin\user\loginController;
 // });
 
 Route::get('/', 'App\Http\Controllers\admin\user\loginController@index');
-
-route::get('testpart/route1', 'App\Http\Controllers\testing\test@test');
+Route::post('/checkValidating', 'App\Http\Controllers\admin\user\loginController@checkValidate');
+Route::get('/main', 'App\Http\Controllers\admin\user\loginController@main') -> name('main');
+Route::get('/main/useradd', 'App\Http\Controllers\admin\user\loginController@viewAddUser');
 
 

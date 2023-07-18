@@ -2020,13 +2020,13 @@
       }, this._options.animationSpeed);
     };
 
-    _proto.toggle = function toggle() {
-      if ($__default["default"](SELECTOR_BODY).hasClass(CLASS_NAME_COLLAPSED)) {
-        this.expand();
-      } else {
-        this.collapse();
-      }
-    };
+    // _proto.toggle = function toggle() {
+    //   if ($__default["default"](SELECTOR_BODY).hasClass(CLASS_NAME_COLLAPSED)) {
+    //     this.expand();
+    //   } else {
+    //     this.collapse();
+    //   }
+    // };
 
     _proto.autoCollapse = function autoCollapse(resize) {
       if (resize === void 0) {
@@ -2119,8 +2119,16 @@
         }
       });
     };
+// Lấy ra các phần tử có thuộc tính data-widget="pushmenu" để thao tác với menu bên
+var toggleButton = document.querySelector('[data-widget="pushmenu"]');
 
+// Tạo một đối tượng PushMenu từ phần tử được lấy ra
+var pushMenu = new PushMenu(toggleButton);
+
+// Gọi phương thức collapse() để thu gọn menu bên
+pushMenu.collapse();
     return PushMenu;
+    
   }();
   /**
    * Data API

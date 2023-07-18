@@ -45,6 +45,12 @@
                     <tr>
                         <td>...</td>
                         <td>...</td>
+                        <td><button><i class="ion ion-refresh"></i></button></td>
+                        <td>...</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td>...</td>
                         <td>...</td>
                         <td>...</td>
                     </tr>
@@ -55,10 +61,9 @@
                         <td>...</td>
                     </tr>
                     <tr>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
+                        <td>
+                            
+                        </td>
                     </tr>
                 </table>
 

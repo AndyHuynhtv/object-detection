@@ -13,4 +13,27 @@ class loginController extends Controller
             'login' => 'Login'
         ]);
     } 
+
+    public function main()
+    {
+        return view('admin.main.index');
+    }
+    public function checkValidate(Request $request)
+    {
+        $this -> validate($request, [
+            'email' => 'required | email:filter',
+            'password' => 'required'
+        ]);
+        if(['email' => 'admin@gmail.com',
+        'password' => '123'
+        ])
+        {
+            return redirect() -> route('main');
+        }
+        else return redirect() -> back();
+    }
+    public function viewAddUser()
+    {
+        return view('admin.main.userAdd');
+    }
 }

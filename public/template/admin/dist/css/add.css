@@ -1,0 +1,29 @@
+li{
+    display:inline;
+    margin-left: 35px;
+}
+.navbar-container{
+    display:flex;
+    position:relative;
+    justify-content: center
+}
+
+.inside-container{
+    width: 80%;
+    height: 60px;
+    position: absolute;
+    background-color: yellow;
+}
+
+.navbar-bar{
+    width: 80%;
+    height: 60px;
+    background-color: red;
+    display:flex;
+    align-items: center;
+}
+
+td{
+    padding: 30px 80px 30px 30px;   
+}
+
