@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin\user;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class loginController extends Controller
 {
@@ -18,16 +19,13 @@ class loginController extends Controller
     {
         return view('admin.main.index');
     }
-    public function checkValidate(Request $request)
+    
+    public function checkValidate(Request $request) 
     {
-        $this -> validate($request, [
-            'email' => 'required | email:filter',
-            'password' => 'required'
-        ]);
-        if(['email' => 'admin@gmail.com',
-        'password' => '123'
-        ])
-        {
+        $userName = $request->input('userName');
+        $userPassword = $request->input('password');
+
+        if(Auth::attempt(['name'=>$userName, 'password'=>$userPassword])){
             return redirect() -> route('main');
         }
         else return redirect() -> back();
