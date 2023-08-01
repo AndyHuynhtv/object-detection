@@ -1,29 +1,376 @@
-li{
-    display:inline;
-    margin-left: 35px;
-}
-.navbar-container{
-    display:flex;
-    position:relative;
-    justify-content: center
-}
+        /* CSS cho navbar */
+        .navbar {
+        background-color: #007bff;
+        padding: 10px;
+            color: #ffffff;
+        }
 
-.inside-container{
-    width: 80%;
-    height: 60px;
-    position: absolute;
-    background-color: yellow;
-}
+        .navbar a {
+            color: #ffffff;
+            margin-right: 10px;
+            text-decoration: none;
+        }
 
-.navbar-bar{
-    width: 80%;
-    height: 60px;
-    background-color: red;
-    display:flex;
-    align-items: center;
-}
+        /* CSS cho tiêu đề h1 */
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
 
-td{
-    padding: 30px 80px 30px 30px;   
-}
+        /* CSS cho bảng */
+        /* table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        } */
 
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* CSS cho nút Update và Delete */
+        .btn-update, .btn-delete {
+            background-color: white;
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-update{
+            border: 1px solid blue;
+        }        
+        .btn-delete{
+            border: 1px solid red;
+        }
+
+        .btn-add-user, .btn-add-room, .form-group .btn-add {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: rgb(121, 59, 59);
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            align-items: center;
+        }
+
+
+
+        /* CSS cho hover nút Update và Delete */
+        .btn-update:hover, .btn-delete:hover {
+            opacity: 0.8;
+        }
+
+        /* CSS cho hover nút "ADD USER" */
+        .btn-add-user:hover, .btn-add-room:hover,.form-group .btn-add:hover {
+            background-color: rgb(179, 88, 88);
+        }
+
+        .icon {
+            font-size: 18px;
+            margin-right: 5px;
+        }
+
+        /* CSS cho biểu tượng "Update" */
+        .icon-update {
+            color: #007bff;
+        }
+
+        /* CSS cho biểu tượng "Delete" */
+        .icon-delete {
+            color: #dc3545;
+        }
+
+            /* CSS cho form */
+        .add-user-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        
+        /* CSS cho biểu tượng "ADD ROOM" */
+        .icon-add-room {
+            color: #ffffff;
+            margin-right: 5px;
+        }
+        
+        /* CSS cho hover nút "ADD ROOM" */
+        .update-form {
+            /* display: flex; */
+            flex-direction: column;
+            margin: 20px;
+        }
+
+        /* CSS cho label */
+        .update-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* CSS cho input */
+        .update-input {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* CSS cho biểu tượng "Update User" */
+        .icon-update-user {
+            color: #ffffff;
+            margin-right: 5px;
+        }
+
+
+        .btn-update-room, .btn-delete-room {
+            padding: 6px 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* CSS cho biểu tượng "Update" và "Delete" trong nút */
+        .icon-update-room, .icon-delete-room {
+            margin-right: 5px;
+        }
+
+        /* CSS cho hover nút "Update" và "Delete" trong bảng */
+        .btn-update-room:hover, .btn-delete-room:hover {
+            background-color: #f2f2f2;
+        }
+
+
+        .checking-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .checking-table th, .checking-table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .checking-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        /* CSS cho dòng đầu tiên của bảng (RoomID) */
+        .room-id-row {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .checking-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .checking-table th, .checking-table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .checking-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        /* CSS cho dòng đầu tiên của bảng (RoomID) */
+        .room-id-row {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .update-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        /* CSS cho input */
+        .update-input {
+            margin-bottom: 15px;
+        }
+        
+        .update-input input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn-print{
+            width: 100%;
+            margin-top: 40px;
+            display:flex;
+            justify-content: center;
+        }
+        .btn-print-admin, .btn-print-user, .btn-check{
+            width: 200px;
+            height: 40px;  
+            font-size: 25px; 
+            border-radius: 5px;
+            background-color:rgb(121, 59, 59);
+            color: white;
+            border: none;
+        }   
+        .btn-print-admin:hover, .btn-print-user:hover,.btn-check:hover{
+            background-color: rgb(190, 82, 82);
+        }
+        .alert{
+            text-align: center;
+        }
+
+
+        .container{
+            align-items: center;
+        }
+
+        .fmUpdUsContainer{
+            width: 400px;
+            padding: 10px 40px 10px 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 0 auto;
+        }
+        .updUsInfo{
+            align-items: center;
+            background-color: #28a745;
+        }
+        h1{
+            padding: 40px;
+        }   
+
+        .form-control{
+            border:none;
+        }
+        .tableContainer{
+            align-items: center;
+            display:flex;
+            justify-content: center;
+        }
+        .tableContainer table{
+            width: 900px;
+        }
+/* 
+        .tableContainer table thead{
+            b: 700px;
+        } */
+
+        .container-fluid li{
+            border: 0px 3px 0px 3px;
+            border: solid white;
+            margin: 0;
+            padding: 5px 15px 5px 15px;
+        }
+
+        .navContainer{
+            align-items:center;
+            display: flex;
+            justify-content: center;
+            
+        }
+
+        .navContainer .container-fluid{
+            width: 1100px;
+            background-color: rgb(121, 59, 59);
+            color: white;
+        }
+        .navContainer a{
+            color: white;
+        }
+
+        .navContainer a:hover{
+            font-size: 17px;
+            padding: 5px 8px 5px 8px;
+        }
+
+        .container h1{
+            color:rgb(121, 59, 59);
+        }
+
+        .tableContainer table thead{
+            background-color:  rgb(121, 59, 59);
+            color: white;
+        } 
+
+        table thead{
+            text-align: center;
+            background-color: rgb(121, 59, 59);
+        }
+
+
+        .tableContainer table thead th, .tableContainer table tbody .colName{
+            color:white;
+            background-color:rgb(121, 59, 59);
+        }
+        .btn-update-form{
+            height: 30px;
+            width: 120px;
+            background-color: rgb(121, 59, 59);
+            color: white;
+            border: 0px;
+            border-radius: 5px;
+        }
+        .btn-update-form:hover{
+            background-color: rgb(198, 84, 84);
+        }
+
+
+
+        
+        
+        
+                
