@@ -6,10 +6,12 @@ use App\Models\user;
 use App\Models\room;
 use App\Models\checkingTime;
 use App\Http\Controllers\Controller;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facedes\Session;
 use Auth;
 use PDF;
+use Illuminate\Support\Facades\View;
 
 
 class adminController extends Controller
@@ -126,7 +128,8 @@ class adminController extends Controller
 
     public function adminCheck()
     {
-        return view('admin.checking.adminCheck');
+        $check = Room::with('checkingTime')->get();
+        return view('admin.checking.adminCheck', compact('check'));
     }
 
     // public function adminPrintPDF()
@@ -161,5 +164,23 @@ class adminController extends Controller
     //     return $pdf->download('checking_time.pdf');
     // }
 
+    public function adminPrintPDF(){
+        //$data = CheckingTime::all(); // Lấy dữ liệu từ bảng CheckingTime
+        $data = Room::with('checkingTime') ->get();
+        $pdf = new Dompdf(); // Khởi tạo đối tượng Dompdf
+    
+        // Render view "checkingTime" với dữ liệu $data
+        $html = View::make('admin.checking.adminCheckPDF', ['data' => $data])->render();
+        
+        // Load HTML vào Dompdf
+        $pdf->loadHtml($html);
+    
+        // Cấu hình và render PDF
+        $pdf->setPaper('A4');
+        $pdf->render();
+    
+        // In ra file PDF với tên "checking_time.pdf"
+        return $pdf->stream('checking_time.pdf');
+    }
 }
 

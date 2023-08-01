@@ -18,4 +18,8 @@ class checkingTime extends Model
         'pictureURL',
         'IDofRoom',
     ];
+    public function room()
+    {
+        return $this->belongsTo(room::class, 'IDofRoom');
+    }
 }

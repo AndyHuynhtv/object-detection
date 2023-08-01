@@ -35,13 +35,13 @@
         </div>
             <h1>CHECKING USER</h1>
 
-            <!-- Bảng "CHECKING" -->
-        <div class = 'tableContainer'>
-            <table class="table tablle-hover">
+        <!-- Bảng "CHECKING" -->
+        @foreach ($data as $room)
+            <table class="checking-table">
                 <!-- Dòng đầu tiên - RoomID -->
                 <thead>
                     <tr class="room-id-row">
-                        <th colspan="2">RoomID</th>
+                        <th colspan="2">{{$room->roomName}}</th>
                     </tr>
                     <tr class="room-id-row">
                         <th>Date-time</th>
@@ -49,13 +49,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($data as $item)
+                @foreach ($room->checkingTime as $checking)
                     <tr>
                         {{-- <td>{{ $item->id }}</td> --}}
-                        <td>{{ $item->date }}</td>
-                        <td>{{ $item->number }}</td>
+                        <td>{{ $checking->date }}</td>
+                        <td>{{ $checking->number }}</td>
                     </tr>
-                    @endforeach
+                @endforeach
                 </tbody>
                
                 <!-- Thêm các hàng khác nếu cần -->
@@ -64,6 +64,7 @@
                     <td colspan ="2">
                         <form action="/user/printPDF" method="get">
                             @csrf
+                            <input type="hidden" name="roomID" value="{{ $room->roomID }}">
                             <div class = "btn-print">
                                 <button class="btn-print-admin" type="submit">PRINT</button>
                             </div>
@@ -71,7 +72,7 @@
                     </td>
                 </tr>
             </table>
-        </div>
+        @endforeach
     </div>
 </body>
 </html>

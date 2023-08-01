@@ -13,7 +13,7 @@
             margin-right: 1.5cm;
         }
         p{
-          text-align:left;
+          text-align: left;
         }
         table{
             border-collapse: collapse;
@@ -30,26 +30,23 @@
 <body>
   <div class="container">
     <h2>Checking Time List</h2>
-    <p><b>Time:</b> {{ now('Asia/Taipei') }}</p>         
+    @foreach($data as $item)
+    <p><b>Room:</b> {{ $item->roomName }}</p>
+    <p><b>Time:</b> {{ now('Asia/Taipei') }}</p>
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th style="width:50px">No.</th>
-          <th style="width:220px">Room</th>
-          <th style="width:110px">Date</th>
-          <th style="width:110px">People count</th>
-          <th style="width:80px">Note</th>
+          <th style="width:70px">No.</th>
+          <th style="width:200px">Date</th>
+          <th style="width:150px">People count</th>
+          <th style="width:150px">Note</th>
         </tr>
       </thead>
       <tbody>
-      @php
-        $count = 1;
-      @endphp
-      @foreach($data as $item)
+      
         @foreach($item->checkingTime as $check)
           <tr>
-            <td id="center">{{$count++}}.</td>
-            <td>{{ $item->roomName }}</td>
+            <td id="center">{{ $loop->iteration }}</td>
             <td id="center">{{ $check->date }}</td>
             <td id="center">{{ $check->number }}</td>
             <td></td>

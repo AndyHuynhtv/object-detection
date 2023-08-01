@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class checkAdmin
@@ -21,7 +22,7 @@ class checkAdmin
             // $role = $user->role;
 
             // Kiểm tra role của người dùng và định tuyến tới trang admin hoặc user
-            if ($user->role == 'admin') {
+            if ($user->role === 'admin') {
                  return redirect('/admin');
             }
         }

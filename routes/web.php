@@ -18,7 +18,7 @@ use App\Models\user;
 */
 // route::get('/', 'App\Http\Controllers\UserController@getLogin');
 // route::post('/', 'App\Http\Controllers\UserController@postLogin');
-route::group([`middleware`=>['AuthenticateSesssion']],function()
+Route::group([`middleware`=>['AuthenticateSesssion']],function()
 {
     route::get('/','App\Http\Controllers\loginController@viewLogin')->name('viewLogin');
     route::get('/logout','App\Http\Controllers\loginController@logout');
@@ -51,8 +51,8 @@ route::group([`middleware`=>['AuthenticateSesssion']],function()
     Route::group([`middleware`=>['checkUser']],function() 
     {
         route::group(['prefix' => 'user'], function(){
-            route::get('/', 'App\Http\Controllers\user\userController@userPage');
-            // Route::get('/printPDF','App\Http\Controllers\user\userController@userPrintPDF'); 
+            Route::get('/', 'App\Http\Controllers\user\userController@userPage');
+            Route::get('/printPDF','App\Http\Controllers\user\userController@userPrintPDF'); 
         });
     });
 
