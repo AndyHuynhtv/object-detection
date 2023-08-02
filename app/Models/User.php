@@ -46,8 +46,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // public function room()
-    // {
-    //     return $this->belongsTo(Room::class, 'IDofRoom', 'id');
-    // }
+     public function room()
+     {
+         return $this->belongsTo(room::class, 'IDofRoom', 'id');
+     }
 }

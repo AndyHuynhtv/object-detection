@@ -36,6 +36,7 @@
             <h1>CHECKING USER</h1>
 
         <!-- Bảng "CHECKING" -->
+
         @foreach ($data as $room)
             <table class="checking-table">
                 <!-- Dòng đầu tiên - RoomID -->

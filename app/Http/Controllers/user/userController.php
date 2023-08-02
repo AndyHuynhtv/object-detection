@@ -15,8 +15,10 @@ use Spatie\FlareClient\View;
 class userController extends Controller
 {
     public function userPage()
-    {
-        $data = room::with('checkingTime')->get();
+    {   
+        $user = User::where('name', session('user-name'))->value('roomID');
+
+        $data = room::with('checkingTime')->where('roomID', $user)->get();
         return view('user.userPage', compact('data'));
     }
 

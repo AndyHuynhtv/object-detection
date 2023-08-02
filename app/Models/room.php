@@ -21,6 +21,10 @@ class room extends Model
     {
         return $this->hasMany(checkingTime::class, 'IDofRoom');
     }
+    public function user()
+    {
+        return $this->hasMany(User::class, 'IDofRoom');
+    }
 
     // public function users()
     // {
