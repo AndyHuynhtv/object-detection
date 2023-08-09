@@ -12,7 +12,6 @@
     <title>UPDATE USER INFO</title>
 </head>
 <body>
-       
     <div class = "container">    
         <img src ="/bg-main.png" height ="300" width = "100% ">
         <div class = "navContainer">
