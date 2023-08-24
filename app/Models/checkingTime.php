@@ -13,8 +13,8 @@ class checkingTime extends Model
     protected $primarykey = 'id';
 
     protected $fillable = [
-        'number',
         'date',
+        'number',
         'pictureURL',
         'IDofRoom',
     ];
@@ -22,4 +22,5 @@ class checkingTime extends Model
     {
         return $this->belongsTo(room::class, 'IDofRoom');
     }
+    public $timestamps = false;
 }

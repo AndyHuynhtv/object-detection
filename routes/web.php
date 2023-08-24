@@ -14,8 +14,10 @@ use App\Models\user;
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
-|
+| 
 */
+//Route::post('/checkingAdd', 'App\Http\Controllers\admin\adminController@checkingAdd')->name('checkingAdd');
+
 // route::get('/', 'App\Http\Controllers\UserController@getLogin');
 // route::post('/', 'App\Http\Controllers\UserController@postLogin');
 Route::group([`middleware`=>['AuthenticateSesssion']],function()
@@ -36,7 +38,8 @@ Route::group([`middleware`=>['AuthenticateSesssion']],function()
             route::post('/userUpdate/{id}','App\Http\Controllers\admin\adminController@userUpdate');
             route::delete('/userDelete/{id}','App\Http\Controllers\admin\adminController@userDelete'); 
             route::get('/adminCheck','App\Http\Controllers\admin\adminController@adminCheck');
-            Route::get('/checking/printPDF','App\Http\Controllers\admin\adminController@adminPrintPDF');
+            route::get('/checking/printPDF','App\Http\Controllers\admin\adminController@adminPrintPDF');
+            route::post('/checking/checkingAdd', 'App\Http\Controllers\admin\adminController@checkingAdd') -> name('check');
         });
         route::group(['prefix'=>'roomManagement'], function(){
             route::get('/','App\Http\Controllers\admin\roomController@roomManagement');
@@ -52,10 +55,9 @@ Route::group([`middleware`=>['AuthenticateSesssion']],function()
     {
         route::group(['prefix' => 'user'], function(){
             Route::get('/', 'App\Http\Controllers\user\userController@userPage');
-            Route::get('/printPDF','App\Http\Controllers\user\userController@userPrintPDF'); 
+            Route::get('/printPDF','App\Http\Controllers\user\userController@userPrintPDF');
+            route::post('/checking/checkingAdd', 'App\Http\Controllers\user\userController@checkingAdd') -> name('check');
         });
     });
 
 });
-
-
