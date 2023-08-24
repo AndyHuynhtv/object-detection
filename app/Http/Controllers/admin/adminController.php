@@ -8,10 +8,13 @@ use App\Models\checkingTime;
 use App\Http\Controllers\Controller;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facedes\Session;
 use Auth;
 use PDF;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Http;
 
 
 class adminController extends Controller
@@ -25,6 +28,30 @@ class adminController extends Controller
     {
         $users = user::get();
         return view('admin.userManagement.userManage',compact('users'));
+    }
+
+    public function checkingAdd(Request $request)
+    {
+        try {
+            $data = $request->get('number');
+            
+            if (!isset($data)) {
+                return response()->json(['message' => 'No data available from API'], 400);
+            }
+
+            $checkAdd = new checkingTime();
+            $checkAdd->date = Carbon::now('Asia/Taipei');
+            $checkAdd->number = $data;
+            $checkAdd->pictureURL = '';
+            $checkAdd->IDofRoom = '6';
+            $checkAdd->save();
+            
+            //$result = (new adminController)->adminCheck();
+  
+            //dd($result);
+        } catch (\Exception $e) {
+            return Redirect::back()->withErrors(['message' => 'Failed to save data: ' . $e->getMessage()]);
+        }
     }
 
     public function userAdd(Request $request)
@@ -57,12 +84,8 @@ class adminController extends Controller
         return redirect('/admin/userManagement/userAdd')->with('success', 'User added successfully');
     }
 
-
-    
-
     public function showUserAdd()
     {
-        
         return view('admin.userManagement.userAdd');
     }
 
@@ -128,8 +151,37 @@ class adminController extends Controller
 
     public function adminCheck()
     {
-        $check = Room::with('checkingTime')->get();
-        return view('admin.checking.adminCheck', compact('check'));
+        $checking = DB::table('checkingTime')
+                ->select('checkingTime.date', 'checkingTime.number', 'checkingTime.IDofRoom', 'room.roomName')
+                ->join('room', 'checkingTime.IDofRoom', '=', 'room.ID')
+                ->orderBy('checkingTime.date')
+                ->get();
+
+        $data = [];
+        foreach ($checking as $row) {
+            $roomId = $row->IDofRoom;
+            $date = $row->date;
+            $time = date('H:i', strtotime($date));
+            $day = date('Y-m-d', strtotime($date));
+            
+            if (!isset($data[$row->IDofRoom])) {
+                $data[$row->IDofRoom] = [
+                    'name' => '' . $row->roomName,
+                    'id' => '' . $roomId,
+                    'dataPoints' => [],
+                ];
+            }
+            $data[$row->IDofRoom]['dataPoints'][] = [
+                'label' => $date,
+                'y' => $row->number,
+                'day' => $day,
+            ];
+        }
+        $check = Room::with(['checkingTime' => function($query) {
+            $query->orderBy('date', 'desc');
+        }])->get();
+        //dd($data);
+        return view('admin.checking.adminCheck', compact(['data', 'check']));
     }
 
     // public function adminPrintPDF()
