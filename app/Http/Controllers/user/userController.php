@@ -82,7 +82,7 @@ class userController extends Controller
         $pdfUser = new Dompdf(); // Khởi tạo đối tượng Dompdf
     
         // Render view "checkingTime" với dữ liệu $data
-        $html = \View::make('user.userCheckPDF', ['data' => $data])->render();
+        $html = View::make('user.userCheckPDF', ['data' => $data])->render();
         
         // Load HTML vào Dompdf
         $pdfUser->loadHtml($html);

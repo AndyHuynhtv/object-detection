@@ -95,22 +95,18 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" style="">
           <div class="col-md-6">
-            <form action="/admin/userManagement/admin/userManagement/checking/printPDF" method="get">
+            <form action="checking/printPDF" method="get">
                 @csrf
-                <div class = "btn-print" style="padding-bottom:15px">
+                <div class = "btn-print" style="padsding-bottom:15px">
                     <button class="btn-print-admin" type="submit">PRINT</button>
                 </div>
             </form>
           </div>
-          <div class="col-md-6">      
-            <form action="" method="">
-                @csrf
-                <div class = "btn-print" style="padding-bottom:15px">
-                    <button class="btn-print-admin" type="submit" onclick="callApi()">CHECK</button>
-                </div>
-            </form>
+          <div class="col-md-3"></div>
+          <div class="col-md-3" style="padding-top:45px">      
+            <input type="text" id="roomSearch" class="form-control" style="font-size:18px" placeholder="Search...">
           </div>
         </div>
 
@@ -120,9 +116,19 @@
           <div class="panel-group" id="{{$room->roomName}}" name="searchRoom">
             <div class="panel panel-default">
               <div class="panel-heading">
-                  <a data-toggle="collapse" href="#{{$room->id}}">
+                <div class="row">
+                  <div class="col-8 pt-3">
+                    <a data-toggle="collapse" href="#{{$room->id}}">
                       <b>{{$room->roomName}}</b>
-                  </a>
+                    </a>
+                  </div>
+                  <div class="col-4">
+                    <form method="GET" action="/admin/userManagement/adminRoomCheck/{{$room->id}}">
+                      @csrf 
+                        <button type="submit" class="btn btn-primary">Checking here</button>
+                    </form>
+                  </div>
+                </div>
               </div>
               <div id="{{$room->id}}" class="panel-collapse collapse text-center table-wrapper-scroll-y my-custom-scrollbar">
                 <table class="table table-bordered text-center mb-0">
@@ -148,43 +154,22 @@
         
     </div>
 
-<script> 
-    function callApi() {
-        fetch('http://127.0.0.1:5000/get_number', {  
-            method: 'GET'
-        })
-            .then(response => response.json())
-            .then(data_get => {
-                if (data_get) {
-                    saveData(data_get.number);
-                    alert(data_get.number);
-                }
-                else {
-                    alert('No data available.');
-                }
-            })
-            .catch(error => {
-                alert('Failed to receive data from the API.');
-                console.error(error);
-            });            
+<script>
+  //Tìm phòng theo tên
+    document.getElementById('roomSearch').addEventListener('input', function() {
+      var searchTerm = this.value.toLowerCase();
+
+      var panelGroups = document.querySelectorAll('.panel-group');
+      panelGroups.forEach(function(panelGroup) {
+        var roomName = panelGroup.querySelector('.panel-heading b').textContent.toLowerCase();
+        if (roomName.includes(searchTerm)) {
+          panelGroup.style.display = 'block';
+        } else {
+          panelGroup.style.display = 'none';
         }
-        
-    function saveData(data_get){
-      alert("chăm");
-        let url = 'http://127.0.0.1:8000/admin/userManagement/checking/checkingAdd';
-        let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        fetch(url, {
-              headers: {
-                  "Content-Type": "application/json",
-                  "Accept": "application/json, text-plain, */*",
-                  "X-Requested-With": "XMLHttpRequest",
-                  "X-CSRF-TOKEN": token
-                  },
-              method: 'post',
-              credentials: "same-origin",
-              body: JSON.stringify({ number: data_get })
-        })
-    }
+        });
+    });
+
 
     var selectedDay = document.getElementById('filterDay').value;
     var selectedRoom = document.getElementById('filterRoom').value;
@@ -228,9 +213,7 @@ function lineChart(){
             y: room.dataPoints[i].y
           });
           var date = new Date(room.dataPoints[i].label);
-          formattedLabel = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
-                          + ' ' + (date.getMonth() + 1) 
-                          + '-' + date.getDate();
+          formattedLabel = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
           labelsX.push(formattedLabel);
         }
         else if((selectedDay == '3days') && (room.id == selectedRoom) &&
