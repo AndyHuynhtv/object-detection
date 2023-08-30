@@ -75,7 +75,7 @@
             <form action="" method="">
             @csrf
               <div class = "btn-print" style="padding-bottom:15px">
-                <button class="btn-print-admin" type="submit" onclick="callApi()">CHECK</button>
+                <button class="btn-print-admin" type="submit" onclick="startYOLO()">CHECK</button>
               </div>
             </form>
           </div>
@@ -121,15 +121,19 @@ function startYOLO() {
         },
         body: JSON.stringify({ start_detection: 1 })
     })
-    .then(response => response.json())
+    .then(response => {
+        return response.json();
+    })
     .then(data => {
-        alert(data);
+      if (data) {
+        callApi();
+      }
     })
     .catch(error => {
-        console.error(error);
-        alert('Không thể điều khiển nhận dạng YOLO');
+        console.error('There was a problem with the fetch operation:', error);
     });
-}
+  }
+
 // ------- Nhận dữ liệu từ api
 function callApi() {
     fetch('http://127.0.0.1:5000/data_web', {  
@@ -149,6 +153,7 @@ function callApi() {
             console.error(error);
         });            
 }
+
 // ------- Gửi dữ liệu sang controller để lưu vào db   
 function saveData(number, image_path){
     let url = 'http://127.0.0.1:8000/user/checking/checkingAdd';

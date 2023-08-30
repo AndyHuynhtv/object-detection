@@ -39,7 +39,9 @@ Route::group([`middleware`=>['AuthenticateSesssion']],function()
             route::delete('/userDelete/{id}','App\Http\Controllers\admin\adminController@userDelete'); 
             route::get('/adminCheck','App\Http\Controllers\admin\adminController@adminCheck');
             route::get('/checking/printPDF','App\Http\Controllers\admin\adminController@adminPrintPDF');
-            route::post('/checking/checkingAdd', 'App\Http\Controllers\admin\adminController@checkingAdd') -> name('check');
+            route::post('/checking/checkingAdd', 'App\Http\Controllers\admin\adminController@checkingAdd');
+            route::get('/adminRoomCheck/{id}', 'App\Http\Controllers\admin\adminController@adminRoomCheck');
+            
         });
         route::group(['prefix'=>'roomManagement'], function(){
             route::get('/','App\Http\Controllers\admin\roomController@roomManagement');

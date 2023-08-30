@@ -27,28 +27,38 @@ class adminController extends Controller
     public function userManage()
     {
         $users = user::get();
-        return view('admin.userManagement.userManage',compact('users'));
+        return view('admin.userManagement.userManage', compact('users'));
+    }
+    
+    public function adminRoomCheck($id)
+    {
+        $checking = Room::with(['checkingTime' => function($query) use ($id) {
+            $query->orderBy('date', 'desc');
+        }])-> where('id', $id) ->get();
+        return view('admin.checking.adminRoomCheck', compact('checking'));
     }
 
     public function checkingAdd(Request $request)
     {
         try {
-            $data = $request->get('number');
+            $number = $request->get('number');
+            $image = $request->get('image_path');
+            $roomID = $request->get('room_id');
+
+            $id = Room::where('roomID', $roomID)->value('id');
             
-            if (!isset($data)) {
+            if (!isset($number)) {
                 return response()->json(['message' => 'No data available from API'], 400);
             }
 
             $checkAdd = new checkingTime();
             $checkAdd->date = Carbon::now('Asia/Taipei');
-            $checkAdd->number = $data;
-            $checkAdd->pictureURL = '';
-            $checkAdd->IDofRoom = '6';
+            $checkAdd->number = $number;
+            $checkAdd->pictureURL = $image;
+            $checkAdd->IDofRoom = $id;
             $checkAdd->save();
             
-            //$result = (new adminController)->adminCheck();
-  
-            //dd($result);
+            return redirect()->route('adminRoomCheck', ['id' => $roomID])->with('success', 'Checking successfully');
         } catch (\Exception $e) {
             return Redirect::back()->withErrors(['message' => 'Failed to save data: ' . $e->getMessage()]);
         }
@@ -234,5 +244,6 @@ class adminController extends Controller
         // In ra file PDF với tên "checking_time.pdf"
         return $pdf->stream('checking_time.pdf');
     }
+
 }
 
